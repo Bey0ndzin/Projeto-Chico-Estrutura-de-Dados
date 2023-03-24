@@ -9,6 +9,7 @@ namespace apProjetoListaLigada
     {
         private int x, y;
         private Color cor;
+        private int espessura;
 
         public Ponto(int x, int y, Color cor)
         {
@@ -46,9 +47,10 @@ namespace apProjetoListaLigada
         }
 
 
-        public virtual void desenhar(Color cor, Graphics g)
+        public virtual void desenhar(Color cor, Graphics g, int espessura)
         {
-            Pen pen = new Pen(cor);
+            this.espessura = espessura;
+            Pen pen = new Pen(cor, espessura);
             g.DrawEllipse(pen, x - 1, y - 1, 1, 1);
         }
 
@@ -79,8 +81,9 @@ namespace apProjetoListaLigada
                    transformaString(X, 5) +
                    transformaString(Y, 5) +
                    transformaString(Cor.R, 5) +
-                   transformaString(Cor.G, 6) +
-                   transformaString(Cor.B, 5);
+                   transformaString(Cor.G, 5) +
+                   transformaString(Cor.B, 5) +
+                   transformaString(espessura, 5);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace apProjetoListaLigada
 {
@@ -189,6 +190,19 @@ namespace apProjetoListaLigada
                 }
             }
         }
+        public ListaSimples<Ponto> ExcluirTodosNos()
+        {
+            var novaLista = new ListaSimples<Ponto>();
+            if (!EstaVazia)
+            {
+                atual = null;
+                anterior = null;
+                ultimo = null;
+                primeiro = null;
+                return novaLista;
+            }
+            return novaLista;
+        }
 
         public bool Remover(Ponto PontoARemover)
         {
@@ -222,6 +236,22 @@ namespace apProjetoListaLigada
             }
             return false;
         }
-
+        public void Salvar(string caminho)
+        {
+            atual = primeiro;
+            if(atual != null)
+            {
+                File.WriteAllText(caminho, atual.Info.ToString() + Environment.NewLine);
+                anterior = atual;
+                atual = atual.Prox;
+                while (atual != null)
+                {
+                    File.AppendAllText(caminho, atual.Info.ToString() + Environment.NewLine);
+                    //escritor.WriteLine(atual.Info.ToString(), caminho);
+                    anterior = atual;
+                    atual = atual.Prox;
+                }
+            }
+        }
     }
 }

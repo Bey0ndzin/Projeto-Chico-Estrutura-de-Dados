@@ -32,6 +32,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAbrir = new System.Windows.Forms.ToolStripButton();
             this.btnSalvar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalvarTexto = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPonto = new System.Windows.Forms.ToolStripButton();
             this.btnReta = new System.Windows.Forms.ToolStripButton();
             this.btnCirculo = new System.Windows.Forms.ToolStripButton();
@@ -48,10 +50,13 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
-            this.dlgSalvar = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.dlgSalvar3 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAreaDesenho)).BeginInit();
             this.stMensagem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -61,6 +66,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAbrir,
             this.btnSalvar,
+            this.btnSalvarTexto,
+            this.toolStripSeparator1,
             this.btnPonto,
             this.btnReta,
             this.btnCirculo,
@@ -91,11 +98,28 @@
             // 
             this.btnSalvar.AutoSize = false;
             this.btnSalvar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvar.Image")));
+            this.btnSalvar.Image = global::apProjetoListaLigada.Properties.Resources.gojo;
             this.btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(32, 32);
-            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.Text = "Salvar como Imagem";
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
+            // btnSalvarTexto
+            // 
+            this.btnSalvarTexto.AutoSize = false;
+            this.btnSalvarTexto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSalvarTexto.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvarTexto.Image")));
+            this.btnSalvarTexto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalvarTexto.Name = "btnSalvarTexto";
+            this.btnSalvarTexto.Size = new System.Drawing.Size(32, 32);
+            this.btnSalvarTexto.Text = "Salvar como Texto";
+            this.btnSalvarTexto.Click += new System.EventHandler(this.btnSalvarTexto_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
             // 
             // btnPonto
             // 
@@ -256,9 +280,40 @@
             // 
             this.dlgAbrir.FileName = "openFileDialog1";
             // 
-            // dlgSalvar
+            // label1
             // 
-            this.dlgSalvar.FileName = "openFileDialog2";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(393, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Espessura:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown1.Location = new System.Drawing.Point(484, 9);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(38, 21);
+            this.numericUpDown1.TabIndex = 4;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // frmGrafico
             // 
@@ -266,6 +321,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(582, 480);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.stMensagem);
             this.Controls.Add(this.pbAreaDesenho);
             this.Controls.Add(this.toolStrip1);
@@ -276,6 +333,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAreaDesenho)).EndInit();
             this.stMensagem.ResumeLayout(false);
             this.stMensagem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,12 +355,16 @@
         private System.Windows.Forms.PictureBox pbAreaDesenho;
         private System.Windows.Forms.StatusStrip stMensagem;
         private System.Windows.Forms.OpenFileDialog dlgAbrir;
-        private System.Windows.Forms.OpenFileDialog dlgSalvar;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripButton btnApagar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.SaveFileDialog dlgSalvar3;
+        private System.Windows.Forms.ToolStripButton btnSalvarTexto;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
