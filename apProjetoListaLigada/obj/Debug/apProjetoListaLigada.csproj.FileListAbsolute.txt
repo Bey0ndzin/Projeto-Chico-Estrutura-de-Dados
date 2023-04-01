@@ -9,3 +9,14 @@ C:\Users\u22147\source\repos\apProjetoListaLigada\apProjetoListaLigada\obj\Debug
 C:\Users\u22147\source\repos\apProjetoListaLigada\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.csproj.CoreCompileInputs.cache
 C:\Users\u22147\source\repos\apProjetoListaLigada\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.exe
 C:\Users\u22147\source\repos\apProjetoListaLigada\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.pdb
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\bin\Debug\apProjetoListaLigada.exe.config
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\bin\Debug\apProjetoListaLigada.exe
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\bin\Debug\apProjetoListaLigada.pdb
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.csproj.AssemblyReference.cache
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.csproj.SuggestedBindingRedirects.cache
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.frmGrafico.resources
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.Properties.Resources.resources
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.csproj.GenerateResource.cache
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.csproj.CoreCompileInputs.cache
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.exe
+C:\Users\Pichau\Documents\GitHub\Projeto-Chico-Estrutura-de-Dados\apProjetoListaLigada\obj\Debug\apProjetoListaLigada.pdb

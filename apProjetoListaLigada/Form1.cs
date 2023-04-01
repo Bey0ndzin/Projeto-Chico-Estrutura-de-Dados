@@ -167,7 +167,6 @@ namespace apProjetoListaLigada
 
                     Elipse novaElipse = new Elipse(p1.X, p1.Y, raioX, raioY, corAtual);
 
-                    figuras.InserirAposFim(new NoLista<Ponto>(novaElipse, null));
                     novaElipse.desenhar(novaElipse.Cor, g, espessura);
                 }
                 else if (esperaFimRetangulo)
@@ -200,13 +199,11 @@ namespace apProjetoListaLigada
                         novoRet = new Retangulo(x, y, largura, altura, corAtual);
                     }
                     //novoRet = new Retangulo(p1.X, p1.Y, largura, altura, corAtual);
-                    figuras.InserirAposFim(new NoLista<Ponto>(novoRet, null));
                     novoRet.desenhar(novoRet.Cor, g, espessura);
                 }
                 else if (esperaFimPolilinha)
                 {
                     Reta novaLinha = new Reta(p1.X, p1.Y, x, y, corAtual);
-                    figuras.InserirAposFim(new NoLista<Ponto>(novaLinha, null));
                     novaLinha.desenhar(novaLinha.Cor, g, espessura);
                     //novaLinha.desenhar(novaLinha.Cor, pbAreaDesenho.CreateGraphics(), espessura);
 
