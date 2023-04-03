@@ -51,7 +51,7 @@ namespace apProjetoListaLigada
         {
             this.espessura = espessura;
             Pen pen = new Pen(cor, espessura);
-            g.DrawEllipse(pen, x - 1, y - 1, 1, 1);
+            g.DrawEllipse(pen, x - espessura / 2, y - espessura / 2, espessura, espessura);
         }
 
         public int CompareTo(Ponto outro)

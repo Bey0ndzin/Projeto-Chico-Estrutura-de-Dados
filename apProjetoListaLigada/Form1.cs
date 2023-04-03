@@ -148,16 +148,25 @@ namespace apProjetoListaLigada
                 }
                 else if (esperaFimCirculo)
                 {
-                    int raioX = Math.Abs(x - p1.X);
-                    int raioY = Math.Abs(y - p1.Y);
+                    /*int raioX = x - p1.X;
+                    int raioY = y - p1.Y;
+                    int rX = Math.Abs(raioX);
+                    int rY = Math.Abs(raioY);
 
-                    int raio;
-                    if (raioX >= raioY)
+
+                    int raio, meioX, meioY;
+                    if (rX >= rY)
                         raio = raioX;
                     else
-                        raio = raioY;
+                        raio = raioY;*/
+                    int dx = x - p1.X;
+                    int dy = y - p1.Y;
+                    int raio = (int)Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2)) / 2;
 
-                    Circulo novoCirculo = new Circulo(p1.X, p1.Y, raio, corAtual);
+                    int meioX = p1.X + dx / 2;
+                    int meioY = p1.Y + dy / 2;
+
+                    Circulo novoCirculo = new Circulo(meioX, meioY, raio, corAtual);
                     novoCirculo.desenhar(novoCirculo.Cor, g, espessura);
                 }
                 else if (esperaFimElipse)
@@ -294,7 +303,7 @@ namespace apProjetoListaLigada
             else if (esperaFimCirculo)
             {
                 paint = false;
-                x = e.X;
+                /*x = e.X;
                 y = e.Y;
                 esperaFimCirculo = false;
                 int raioX = Math.Abs(e.X - p1.X);
@@ -304,9 +313,16 @@ namespace apProjetoListaLigada
                 if (raioX >= raioY)
                     raio = raioX;
                 else
-                    raio = raioY;
+                    raio = raioY;*/
 
-                Circulo novoCirculo = new Circulo(p1.X, p1.Y, raio, corAtual);
+                int dx = x - p1.X;
+                int dy = y - p1.Y;
+                int raio = (int)Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2)) / 2;
+
+                int meioX = p1.X + dx / 2;
+                int meioY = p1.Y + dy / 2;
+
+                Circulo novoCirculo = new Circulo(meioX, meioY, raio, corAtual);
 
                 figuras.InserirAposFim(new NoLista<Ponto>(novoCirculo, null));
                 novoCirculo.desenhar(novoCirculo.Cor, grafico, espessura);
