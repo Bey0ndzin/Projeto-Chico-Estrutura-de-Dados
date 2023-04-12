@@ -34,8 +34,6 @@ namespace apProjetoListaLigada
         bool esperaFimPolilinha = false;
         bool primLinha = false;
 
-        int pXPoli;
-        int pYPoli;
         int espessura = 1;
         bool paint = false;
         int x;
@@ -45,6 +43,7 @@ namespace apProjetoListaLigada
         Graphics grafico;
 
         ListaSimples<Ponto> figuras = new ListaSimples<Ponto>();
+        Polilinha poli;
         Color corAtual = Color.Black;
         private static Ponto p1 = new Ponto(0, 0, Color.Black);
         public frmGrafico()
@@ -54,6 +53,7 @@ namespace apProjetoListaLigada
             grafico = Graphics.FromImage(bm);
             grafico.Clear(Color.White);
             pbAreaDesenho.Image = bm;
+            poli = new Polilinha(0, 0, corAtual);
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace apProjetoListaLigada
                                 Ponto novoPonto = new Ponto(xBase, yBase, cor);
                                 novoPonto.desenhar(novoPonto.Cor, grafico, espessuraP);
                                 break;
-                            case 'r':
+                            case 'l':
                                 int xFinal = Convert.ToInt32(linha.Substring(30, 5).Trim());
                                 int yFinal = Convert.ToInt32(linha.Substring(35, 5).Trim());
                                 int espessuraR = Convert.ToInt32(linha.Substring(40, 5).Trim());
@@ -112,13 +112,19 @@ namespace apProjetoListaLigada
                                 Elipse novaElipse = new Elipse(xBase, yBase, raioX, raioY, cor);
                                 novaElipse.desenhar(novaElipse.Cor, grafico, espessuraE);
                                 break;
-                            case 't':
+                            case 'r':
                                 int xFinalRet = Convert.ToInt32(linha.Substring(30, 5).Trim());
                                 int yFinalRet = Convert.ToInt32(linha.Substring(35, 5).Trim());
                                 int espessuraRet = Convert.ToInt32(linha.Substring(40, 5).Trim());
                                 figuras.InserirAposFim(new NoLista<Ponto>(new Retangulo(xBase, xFinalRet, yBase, yFinalRet, cor), null));
                                 Retangulo novoRet = new Retangulo(xBase, xFinalRet, yBase, yFinalRet, cor);
                                 novoRet.desenhar(novoRet.Cor, grafico, espessuraRet);
+                                break;
+                            case 'g':
+                                int xAtual = Convert.ToInt32(linha.Substring(30, 5).Trim());
+                                int yAtual = Convert.ToInt32(linha.Substring(35, 5).Trim());
+                                int espessuraPoli = Convert.ToInt32(linha.Substring(40, 5).Trim());
+                                poli.adicionarPonto(new Ponto(xAtual, yAtual, corAtual));
                                 break;
                         }
                         //arqFiguras.ReadLine();
@@ -148,17 +154,6 @@ namespace apProjetoListaLigada
                 }
                 else if (esperaFimCirculo)
                 {
-                    /*int raioX = x - p1.X;
-                    int raioY = y - p1.Y;
-                    int rX = Math.Abs(raioX);
-                    int rY = Math.Abs(raioY);
-
-
-                    int raio, meioX, meioY;
-                    if (rX >= rY)
-                        raio = raioX;
-                    else
-                        raio = raioY;*/
                     int dx = x - p1.X;
                     int dy = y - p1.Y;
                     int raio = (int)Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2)) / 2;
@@ -207,15 +202,12 @@ namespace apProjetoListaLigada
                         altura = p1.Y - y;
                         novoRet = new Retangulo(x, y, largura, altura, corAtual);
                     }
-                    //novoRet = new Retangulo(p1.X, p1.Y, largura, altura, corAtual);
                     novoRet.desenhar(novoRet.Cor, g, espessura);
                 }
                 else if (esperaFimPolilinha)
                 {
                     Reta novaLinha = new Reta(p1.X, p1.Y, x, y, corAtual);
                     novaLinha.desenhar(novaLinha.Cor, g, espessura);
-                    //novaLinha.desenhar(novaLinha.Cor, pbAreaDesenho.CreateGraphics(), espessura);
-
                 }
             }
         }
@@ -251,8 +243,7 @@ namespace apProjetoListaLigada
             esperaFimRetangulo = false;
             esperaInicioPolilinha = false;
             esperaFimPolilinha = false;
-            bool primLinha = false;
-            bool fimPoli = false;
+            primLinha = false;
         }
 
 
@@ -270,9 +261,9 @@ namespace apProjetoListaLigada
             }
             else if(esperaInicioReta)
             {
-                p1.SetCor(corAtual);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
+                p1.Cor = corAtual;
+                p1.X = e.X;
+                p1.Y = e.Y;
                 esperaInicioReta = false;
                 esperaFimReta = true;
                 stMensagem.Items[1].Text = "clique no ponto final da reta";
@@ -293,9 +284,9 @@ namespace apProjetoListaLigada
             }
             else if (esperaInicioCirculo)
             {
-                p1.SetCor(corAtual);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
+                p1.Cor = corAtual;
+                p1.X = e.X;
+                p1.Y = e.Y;
                 esperaInicioCirculo = false;
                 esperaFimCirculo = true;
                 stMensagem.Items[1].Text = "Clique no local do ponto final do círculo";
@@ -303,17 +294,6 @@ namespace apProjetoListaLigada
             else if (esperaFimCirculo)
             {
                 paint = false;
-                /*x = e.X;
-                y = e.Y;
-                esperaFimCirculo = false;
-                int raioX = Math.Abs(e.X - p1.X);
-                int raioY = Math.Abs(e.Y - p1.Y);
-
-                int raio;
-                if (raioX >= raioY)
-                    raio = raioX;
-                else
-                    raio = raioY;*/
 
                 int dx = x - p1.X;
                 int dy = y - p1.Y;
@@ -332,9 +312,9 @@ namespace apProjetoListaLigada
             }
             else if (esperaInicioElipse)
             {
-                p1.SetCor(corAtual);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
+                p1.Cor = corAtual;
+                p1.X = e.X;
+                p1.Y = e.Y;
                 esperaInicioElipse = false;
                 esperaFimElipse = true;
                 stMensagem.Items[1].Text = "Clique no local do ponto final da Elipse";
@@ -358,9 +338,9 @@ namespace apProjetoListaLigada
             }
             else if (esperaInicioRetangulo)
             {
-                p1.SetCor(corAtual);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
+                p1.Cor = corAtual;
+                p1.X = e.X;
+                p1.Y = e.Y;
                 esperaInicioRetangulo = false;
                 esperaFimRetangulo = true;
                 stMensagem.Items[1].Text = "clique no ponto final do retangulo";
@@ -399,7 +379,6 @@ namespace apProjetoListaLigada
                     altura = p1.Y - e.Y;
                     novoRet = new Retangulo(e.X, e.Y, largura, altura, corAtual);
                 }
-                //novoRet = new Retangulo(p1.X, p1.Y, largura, altura, corAtual);
                 figuras.InserirAposFim(new NoLista<Ponto>(novoRet, null));
                 novoRet.desenhar(novoRet.Cor, grafico, espessura);
                 stMensagem.Items[1].Text = "Clique no local do ponto inicial do retangulo";
@@ -408,14 +387,10 @@ namespace apProjetoListaLigada
             }
             else if (esperaInicioPolilinha)
             {
-                if (primLinha)
-                {
-                    pXPoli = e.X;
-                    pYPoli = e.Y;
-                }
-                p1.SetCor(corAtual);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
+                poli.adicionarPonto(new Ponto(e.X, e.Y, corAtual));
+                p1.Cor = corAtual;
+                p1.X = e.X;
+                p1.Y = e.Y;
                 esperaInicioPolilinha = false;
                 esperaFimPolilinha = true;
                 primLinha = false;
@@ -423,31 +398,31 @@ namespace apProjetoListaLigada
             }
             else if (esperaFimPolilinha)
             {
+                poli.adicionarPonto(new Ponto(e.X, e.Y, corAtual));
                 paint = false;
                 x = e.X;
                 y = e.Y;
                 esperaFimPolilinha = true;
-                Reta novaLinha = new Reta(p1.X, p1.Y, e.X, e.Y, corAtual);
-                figuras.InserirAposFim(new NoLista<Ponto>(novaLinha, null));
-                novaLinha.desenhar(novaLinha.Cor, grafico, espessura);
-                //novaLinha.desenhar(novaLinha.Cor, pbAreaDesenho.CreateGraphics(), espessura);
-                p1.SetX(e.X);
-                p1.SetY(e.Y);
                 stMensagem.Items[1].Text = "Dois cliques para finalizar polilinha";
-                if (pXPoli - e.X <= espessura && pXPoli - e.X - espessura >= 0 && pYPoli - e.Y <= espessura && pYPoli - e.Y >= 0)
+                if (p1.X - e.X <= espessura && p1.X - e.X - espessura >= 0 && p1.Y - e.Y <= espessura && p1.Y - e.Y >= 0)
                 {
                     limparEsperas();
                     stMensagem.Items[1].Text = "Polilinha finalizada!";
                     esperaInicioPolilinha = true;
                     primLinha = true;
                 }
-                else if (e.X - pXPoli <= espessura && e.X - pXPoli >= 0 && e.Y - pYPoli - espessura <= espessura && e.Y - pYPoli >= 0)
+                else if (e.X - p1.X <= espessura && e.X - p1.X >= 0 && e.Y - p1.Y - espessura <= espessura && e.Y - p1.Y >= 0)
                 {
                     limparEsperas();
                     stMensagem.Items[1].Text = "Polilinha finalizada!";
                     esperaInicioPolilinha = true;
                     primLinha = true;
                 }
+            }
+            if (!poli.EstaVazia())
+            {
+                figuras.InserirAposFim(poli);
+                poli.desenhar(corAtual, grafico, espessura);
             }
             pbAreaDesenho.Refresh();
         }
@@ -487,7 +462,7 @@ namespace apProjetoListaLigada
             if(esperaFimPolilinha == true)
             {
                 stMensagem.Items[1].Text = "Polilinha finalizada!";
-                Reta novaLinha = new Reta(p1.X, p1.Y, pXPoli, pYPoli, corAtual);
+                Reta novaLinha = new Reta(p1.X, p1.Y, p1.X, p1.Y, corAtual);
                 figuras.InserirAposFim(new NoLista<Ponto>(novaLinha, null));
                 novaLinha.desenhar(novaLinha.Cor, grafico, espessura);
                 pbAreaDesenho.Refresh();
@@ -504,7 +479,7 @@ namespace apProjetoListaLigada
             {
                 paint = false;
                 stMensagem.Items[1].Text = "Polilinha finalizada!";
-                Reta novaLinha = new Reta(p1.X, p1.Y, pXPoli, pYPoli, corAtual);
+                Reta novaLinha = new Reta(p1.X, p1.Y, p1.X, p1.Y, corAtual);
                 figuras.InserirAposFim(new NoLista<Ponto>(novaLinha, null));
                 novaLinha.desenhar(novaLinha.Cor, grafico, espessura);
                 pbAreaDesenho.Refresh();

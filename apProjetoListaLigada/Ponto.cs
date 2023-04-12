@@ -21,32 +21,20 @@ namespace apProjetoListaLigada
         public int X
         {
             get => x;
+            set => x = value;
         }
         
         public int Y
         {
-            get => y; 
+            get => y;
+            set => y = value;
         }
 
         public Color Cor
         { 
-            get => cor; 
+            get => cor;
+            set => cor = value;
         }
-
-        public void SetCor(Color corNova)
-        {
-            cor = corNova;
-        }
-        public void SetX(int X)
-        {
-            x = X;
-        }
-        public void SetY(int Y)
-        {
-            y = Y;
-        }
-
-
         public virtual void desenhar(Color cor, Graphics g, int espessura)
         {
             this.espessura = espessura;

@@ -253,5 +253,21 @@ namespace apProjetoListaLigada
                 }
             }
         }
+
+        public void IniciarPercurso()
+        {
+            anterior = null;
+            atual = primeiro;
+        }
+        public bool Percorrer()
+        {
+            if(atual != null)
+            {
+                anterior = atual;
+                atual = atual.Prox;
+                return true;
+            }
+            return false;
+        }
     }
 }

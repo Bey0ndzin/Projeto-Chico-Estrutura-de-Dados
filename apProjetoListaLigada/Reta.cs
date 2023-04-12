@@ -13,31 +13,16 @@ namespace apProjetoListaLigada
         
         }
 
-        public void desenhar(Color corDesenho, Graphics g, int espessura)
+        public override void desenhar(Color corDesenho, Graphics g, int espessura)
         {
             this.espessura = espessura;
             Pen pen = new Pen(corDesenho, espessura);
             g.DrawLine(pen, base.X, pontoFinal.X, base.Y, pontoFinal.Y);
             //g.DrawLine(pen, base.X, base.Y, pontoFinal.X, pontoFinal.Y);
         }
-
-        public String transformaString(int valor, int qntPosicao)
-        {
-            String cadeia = valor + "";
-            while (cadeia.Length < qntPosicao)
-                cadeia = "0" + cadeia;
-            return cadeia.Substring(0, qntPosicao);
-        }
-        public String transformaString(String valor, int qntPosicao)
-        {
-            String cadeia = valor + "";
-            while (cadeia.Length < qntPosicao)
-                cadeia = cadeia + " ";
-            return cadeia.Substring(0, qntPosicao);
-        }
         public override string ToString()
         {
-            return transformaString("r", 5) +
+            return transformaString("l", 5) +
                    transformaString(base.X, 5) +
                    transformaString(base.Y, 5) +
                    transformaString(Cor.R, 5) +

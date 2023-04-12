@@ -30,21 +30,6 @@ namespace apProjetoListaLigada
             //g.DrawEllipse(pen, base.X - raio, 2 * raio, base.Y - raio, 2 * raio);
             g.DrawEllipse(pen, base.X - raio, base.Y - raio, 2*raio, 2*raio);
         }
-
-        public String transformaString(int valor, int qntPosicao)
-        {
-            String cadeia = valor + "";
-            while (cadeia.Length < qntPosicao)
-                cadeia = "0" + cadeia;
-            return cadeia.Substring(0, qntPosicao);
-        }
-        public String transformaString(String valor, int qntPosicao)
-        {
-            String cadeia = valor + "";
-            while (cadeia.Length < qntPosicao)
-                cadeia = cadeia + " ";
-            return cadeia.Substring(0, qntPosicao);
-        }
         public override string ToString()
         {
             return transformaString("c", 5) +
