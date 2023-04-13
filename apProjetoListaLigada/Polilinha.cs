@@ -9,7 +9,7 @@ namespace apProjetoListaLigada
 {
     class Polilinha : Ponto
     {
-        private static ListaSimples<Ponto> pontosDaPoli;
+        private ListaSimples<Ponto> pontosDaPoli;
         private int espessura;
         public Polilinha(int x1, int y1, Color novaCor) : base(x1, y1, novaCor)
         {
@@ -21,51 +21,43 @@ namespace apProjetoListaLigada
             this.espessura = espessura;
             Pen pen = new Pen(corDesenho, espessura);
             Ponto inicio = null, fim = null;
-            pontosDaPoli.IniciarPercurso();
-            while(pontosDaPoli.Percorrer())
+            foreach(Ponto p in pontosDaPoli.Lista())
             {
-                if (inicio == null && pontosDaPoli.Atual != null)
-                    inicio = pontosDaPoli.Atual.Info;
+                if (inicio == null)
+                    inicio = p;
                 else
                 {
-                    if(pontosDaPoli.Atual != null)
+                    fim = p;
+                    g.DrawLine(pen, inicio.X, inicio.Y, fim.X, fim.Y);
+                    inicio = fim;
+                    if (p == pontosDaPoli.Ultimo.Info)
                     {
-                        fim = pontosDaPoli.Atual.Info;
+                        fim = pontosDaPoli.Primeiro.Info;
                         g.DrawLine(pen, inicio.X, inicio.Y, fim.X, fim.Y);
-                        inicio = fim;
                     }
                 }
             }
         }
         public override string ToString()
         {
-            var lista = new List<Ponto>();
             string listaPontos = "";
-            pontosDaPoli.IniciarPercurso();
-            while(pontosDaPoli.Percorrer())
-            {
-                lista.Add(pontosDaPoli.Atual.Info);
-            }
-            /*for (int i = 0; i < pontosDaPoli.QuantosNos; i++)
-            {
-                pontosDaPoli.Atual = pontosDaPoli.Primeiro;
-                for(int v = 0; v < i; v++)
-                {
-                    if(pontosDaPoli.Atual != null)
-                        pontosDaPoli.Atual = pontosDaPoli.Atual.Prox;
-                }
-                lista.Add(pontosDaPoli.Atual.Info);
-            }*/
-            foreach (Ponto p in lista)
+            foreach (Ponto p in pontosDaPoli.Lista())
             {
                 listaPontos += transformaString("g", 5) +
-                                transformaString(p.X, 5) +
-                                transformaString(p.Y, 5) +
-                                transformaString(p.Cor.R, 5) +
-                                transformaString(p.Cor.G, 5) +
-                                transformaString(p.Cor.B, 5) +
-                                transformaString(p.Espessura, 5) + "\n";
+                               transformaString(p.X, 5) +
+                               transformaString(p.Y, 5) +
+                               transformaString(p.Cor.R, 5) +
+                               transformaString(p.Cor.G, 5) +
+                               transformaString(p.Cor.B, 5) +
+                               transformaString(espessura, 5) + "\n";
             }
+            listaPontos += transformaString("k", 5) +
+                           transformaString(0, 5) +
+                           transformaString(0, 5) +
+                           transformaString(0, 5) +
+                           transformaString(0, 5) +
+                           transformaString(0, 5) +
+                           transformaString(0, 5) + "\n";
             return listaPontos;
         }
         public void adicionarPonto(Ponto p)

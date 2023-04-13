@@ -39,8 +39,7 @@ namespace apProjetoListaLigada
         bool paint = false;
         int poliPrimX;
         int poliPrimY;
-        int x;
-        int y;
+        int x, y;
 
         //Bitmap e Grafico para salvar como Imagem
         Bitmap bm;
@@ -62,7 +61,6 @@ namespace apProjetoListaLigada
             grafico = Graphics.FromImage(bm);
             grafico.Clear(Color.White);
             pbAreaDesenho.Image = bm;
-            poli = new Polilinha(0, 0, corAtual);
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
@@ -128,8 +126,15 @@ namespace apProjetoListaLigada
                                     novoRet.desenhar(novoRet.Cor, grafico, espessuraRet);
                                     break;
                                 case 'g':
+                                    if (poli == null)
+                                        poli = new Polilinha(0, 0, corAtual);
                                     espessuraPoli = Convert.ToInt32(linha.Substring(30, 5).Trim());
                                     poli.adicionarPonto(new Ponto(xBase, yBase, corAtual));
+                                    break;
+                                case 'k':
+                                    figuras.InserirAposFim(poli);
+                                    poli.desenhar(corAtual, grafico, espessuraPoli);
+                                    poli = null;
                                     break;
                             }
 
@@ -137,7 +142,6 @@ namespace apProjetoListaLigada
                             pbAreaDesenho.Invalidate();
                         }
                     }
-                    poli.desenhar(corAtual, grafico, espessuraPoli);
                     arqFiguras.Close();
                 }
                 catch (IOException)
@@ -400,6 +404,7 @@ namespace apProjetoListaLigada
                 esperaInicioPolilinha = false;
                 esperaFimPolilinha = true;
                 stMensagem.Items[1].Text = "clique no ponto final da polilinha";
+                numericUpDown1.Enabled = false;
             }
             else if (esperaFimPolilinha)
             {
@@ -421,6 +426,7 @@ namespace apProjetoListaLigada
                     {
                         figuras.InserirAposFim(poli);
                     }
+                    numericUpDown1.Enabled = true;
                 }
                 else if (e.X - poliPrimX <= espessura && e.X - poliPrimX >= 0 && e.Y - poliPrimY <= espessura && e.Y - poliPrimY >= 0)
                 {
@@ -431,6 +437,7 @@ namespace apProjetoListaLigada
                     {
                         figuras.InserirAposFim(poli);
                     }
+                    numericUpDown1.Enabled = true;
                 }
             }
 
@@ -484,6 +491,7 @@ namespace apProjetoListaLigada
                     /*foreach(Ponto p in poli.Listar())
                         figuras.InserirAposFim(p);*/
                 }
+                numericUpDown1.Enabled = true;
             }
             esperaInicioPolilinha = true;
         }
@@ -505,6 +513,7 @@ namespace apProjetoListaLigada
                     /*foreach (Ponto p in poli.Listar())
                         figuras.InserirAposFim(p);*/
                 }
+                numericUpDown1.Enabled = true;
             }
         }
 

@@ -250,5 +250,22 @@ namespace apProjetoListaLigada
             }
             return false;
         }
+        /* Apenas um teste (Favor ignorar)
+        public NoLista<Ponto> this[int id]
+        {
+            get
+            {
+                if (id < 0 || id > quantosNos) throw new IndexOutOfRangeException();
+                atual = primeiro;
+                int idAtual = 0;
+                while (atual != null)
+                {
+                    atual = atual.Prox;
+                    if (idAtual < id)
+                        idAtual++;
+                }
+                return atual;
+            }
+        }*/
     }
 }
