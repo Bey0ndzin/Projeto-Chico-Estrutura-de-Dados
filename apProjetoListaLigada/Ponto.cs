@@ -35,6 +35,12 @@ namespace apProjetoListaLigada
             get => cor;
             set => cor = value;
         }
+
+        public int Espessura
+        {
+            get => espessura;
+            set => espessura = value;
+        }
         public virtual void desenhar(Color cor, Graphics g, int espessura)
         {
             this.espessura = espessura;

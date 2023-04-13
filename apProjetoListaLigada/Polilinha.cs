@@ -9,7 +9,7 @@ namespace apProjetoListaLigada
 {
     class Polilinha : Ponto
     {
-        private ListaSimples<Ponto> pontosDaPoli;
+        private static ListaSimples<Ponto> pontosDaPoli;
         private int espessura;
         public Polilinha(int x1, int y1, Color novaCor) : base(x1, y1, novaCor)
         {
@@ -24,25 +24,49 @@ namespace apProjetoListaLigada
             pontosDaPoli.IniciarPercurso();
             while(pontosDaPoli.Percorrer())
             {
-                if (inicio == null)
+                if (inicio == null && pontosDaPoli.Atual != null)
                     inicio = pontosDaPoli.Atual.Info;
                 else
                 {
-                    fim = pontosDaPoli.Atual.Info;
-                    g.DrawLine(pen, inicio.X, inicio.Y, fim.X, fim.Y);
-                    inicio = fim = null;
+                    if(pontosDaPoli.Atual != null)
+                    {
+                        fim = pontosDaPoli.Atual.Info;
+                        g.DrawLine(pen, inicio.X, inicio.Y, fim.X, fim.Y);
+                        inicio = fim;
+                    }
                 }
             }
         }
         public override string ToString()
         {
-            return transformaString("g", 5) +
-                   transformaString(base.X, 5) +
-                   transformaString(base.Y, 5) +
-                   transformaString(Cor.R, 5) +
-                   transformaString(Cor.G, 5) +
-                   transformaString(Cor.B, 5) +
-                   transformaString(espessura, 5);
+            var lista = new List<Ponto>();
+            string listaPontos = "";
+            pontosDaPoli.IniciarPercurso();
+            while(pontosDaPoli.Percorrer())
+            {
+                lista.Add(pontosDaPoli.Atual.Info);
+            }
+            /*for (int i = 0; i < pontosDaPoli.QuantosNos; i++)
+            {
+                pontosDaPoli.Atual = pontosDaPoli.Primeiro;
+                for(int v = 0; v < i; v++)
+                {
+                    if(pontosDaPoli.Atual != null)
+                        pontosDaPoli.Atual = pontosDaPoli.Atual.Prox;
+                }
+                lista.Add(pontosDaPoli.Atual.Info);
+            }*/
+            foreach (Ponto p in lista)
+            {
+                listaPontos += transformaString("g", 5) +
+                                transformaString(p.X, 5) +
+                                transformaString(p.Y, 5) +
+                                transformaString(p.Cor.R, 5) +
+                                transformaString(p.Cor.G, 5) +
+                                transformaString(p.Cor.B, 5) +
+                                transformaString(p.Espessura, 5) + "\n";
+            }
+            return listaPontos;
         }
         public void adicionarPonto(Ponto p)
         {
@@ -50,9 +74,19 @@ namespace apProjetoListaLigada
         }
         public bool EstaVazia()
         {
-            if (pontosDaPoli.EstaVazia)
+            if (!pontosDaPoli.EstaVazia)
                 return false;
             return true;
+        }
+        public List<Ponto> Listar()
+        {
+            var lista = new List<Ponto>();
+            pontosDaPoli.IniciarPercurso();
+            while(pontosDaPoli.Percorrer())
+            {
+                lista.Add(pontosDaPoli.Atual.Info);
+            }
+            return lista;
         }
     }
 }

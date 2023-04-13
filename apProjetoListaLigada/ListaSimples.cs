@@ -27,7 +27,7 @@ namespace apProjetoListaLigada
             get => quantosNos;
         }
 
-        public NoLista<Ponto> Atual { get => atual; }
+        public NoLista<Ponto> Atual { get => atual; set => atual = value; }
         public NoLista<Ponto> Anterior { get => anterior; }
         public NoLista<Ponto> Ultimo { get => ultimo; }
         public NoLista<Ponto> Primeiro { get => primeiro; }
@@ -170,26 +170,6 @@ namespace apProjetoListaLigada
             }
             return novaLista;
         }
-
-        public void ExcluirNo2(Ponto PontoExcluir)
-        {
-            if (!EstaVazia)
-            {
-                if (ExistePonto(PontoExcluir))
-                {
-                    if (anterior != null)
-                        anterior.Prox = atual.Prox;
-
-                    while (atual != null && atual.Prox != null)
-                    {
-                        atual.Info = atual.Prox.Info;
-                        atual = atual.Prox;
-                    }
-                    atual = null;
-                    quantosNos--;
-                }
-            }
-        }
         public ListaSimples<Ponto> ExcluirTodosNos()
         {
             var novaLista = new ListaSimples<Ponto>();
@@ -239,7 +219,7 @@ namespace apProjetoListaLigada
         public void Salvar(string caminho)
         {
             atual = primeiro;
-            if(atual != null)
+            if (atual != null)
             {
                 File.WriteAllText(caminho, atual.Info.ToString() + Environment.NewLine);
                 anterior = atual;
@@ -252,8 +232,9 @@ namespace apProjetoListaLigada
                     atual = atual.Prox;
                 }
             }
+            else
+                File.WriteAllText(caminho, "");
         }
-
         public void IniciarPercurso()
         {
             anterior = null;
