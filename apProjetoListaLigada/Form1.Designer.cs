@@ -98,7 +98,7 @@
             // 
             this.btnSalvar.AutoSize = false;
             this.btnSalvar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSalvar.Image = global::apProjetoListaLigada.Properties.Resources.gojo;
+            this.btnSalvar.Image = global::apProjetoListaLigada.Properties.Resources.icon;
             this.btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(32, 32);
@@ -278,7 +278,7 @@
             // 
             // dlgAbrir
             // 
-            this.dlgAbrir.FileName = "openFileDialog1";
+            this.dlgAbrir.FileName = "figuras";
             // 
             // label1
             // 

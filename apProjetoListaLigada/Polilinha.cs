@@ -16,6 +16,11 @@ namespace apProjetoListaLigada
             pontosDaPoli = new ListaSimples<Ponto>();
         }
 
+        public int Espessura
+        {
+            get => espessura;
+            set => espessura = value;
+        }
         public override void desenhar(Color corDesenho, Graphics g, int espessura)
         {
             this.espessura = espessura;
@@ -49,7 +54,7 @@ namespace apProjetoListaLigada
                                transformaString(p.Cor.R, 5) +
                                transformaString(p.Cor.G, 5) +
                                transformaString(p.Cor.B, 5) +
-                               transformaString(espessura, 5) + "\n";
+                               transformaString(0, 5) + "\n";
             }
             listaPontos += transformaString("k", 5) +
                            transformaString(0, 5) +
@@ -57,7 +62,7 @@ namespace apProjetoListaLigada
                            transformaString(0, 5) +
                            transformaString(0, 5) +
                            transformaString(0, 5) +
-                           transformaString(0, 5) + "\n";
+                           transformaString(espessura, 5);
             return listaPontos;
         }
         public void adicionarPonto(Ponto p)

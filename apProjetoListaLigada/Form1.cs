@@ -128,10 +128,10 @@ namespace apProjetoListaLigada
                                 case 'g':
                                     if (poli == null)
                                         poli = new Polilinha(0, 0, corAtual);
-                                    espessuraPoli = Convert.ToInt32(linha.Substring(30, 5).Trim());
                                     poli.adicionarPonto(new Ponto(xBase, yBase, corAtual));
                                     break;
                                 case 'k':
+                                    espessuraPoli = Convert.ToInt32(linha.Substring(30, 5).Trim());
                                     figuras.InserirAposFim(poli);
                                     poli.desenhar(corAtual, grafico, espessuraPoli);
                                     poli = null;
@@ -394,6 +394,7 @@ namespace apProjetoListaLigada
             }
             else if (esperaInicioPolilinha)
             {
+                poli = new Polilinha(0, 0, corAtual);
                 poli.adicionarPonto(new Ponto(e.X, e.Y, corAtual));
                 poliPrimX = e.X;
                 poliPrimY = e.Y;
@@ -405,6 +406,7 @@ namespace apProjetoListaLigada
                 esperaFimPolilinha = true;
                 stMensagem.Items[1].Text = "clique no ponto final da polilinha";
                 numericUpDown1.Enabled = false;
+                poli.Espessura = (int)numericUpDown1.Value;
             }
             else if (esperaFimPolilinha)
             {
